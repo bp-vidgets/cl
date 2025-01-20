@@ -3,7 +3,7 @@ WORKDIR /app
 COPY ./requirements.txt /app/requirements.txt
 
 RUN pip install -r requirements.txt
-
+ENV ASSIGNED_BY_ID = None
 ENV URLBITRIX=None
 ENV EMOJI=None
 ENV SOURCE_ID=None
