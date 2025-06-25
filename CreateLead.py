@@ -6,8 +6,6 @@ app = FastAPI()
 URLBITRIX = os.environ['URLBITRIX']
 EMOJI = os.environ['EMOJI']
 SOURCE_ID = os.environ['SOURCE_ID']
-WMIDFIELD = os.environ['WMIDFIELD'] #WMID USER FIELD
-TS_ID = os.environ['TS_ID'] #TRACKING_SOURCE_ID
 ASSIGNED_BY_ID = os.environ['ASSIGNED_BY_ID']
 @app.post("/addlead/")
 def read_root(NAME:str,
@@ -27,7 +25,7 @@ def read_root(NAME:str,
             'UTM_CAMPAIGN':UTM_CAMPAIGN,
             'UTM_CONTENT':UTM_CONTENT,
             'UTM_TERM':UTM_TERM,
-            'COMMENTS':COMMENT,
+            'COMMENTS':COMMENT
         }}
     response = requests.post(str(f'{URLBITRIX}/crm.lead.add.json'), json=lead_data)
     print(response)
