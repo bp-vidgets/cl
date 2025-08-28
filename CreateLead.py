@@ -19,8 +19,8 @@ def read_post_root(item: Item):
             "STATUS_ID": "NEW",
             "SOURCE_ID": SOURCE_ID,
             "UTM_SOURCE":item.fields['UTM_SOURCE'],
-            "UTM_MEDIUM":item.fields['UTM_MEDIUM'],
-            "UTM_CAMPAIGN":item.fields['UTM_CAMPAIGN'],
+            #"UTM_MEDIUM":item.fields['UTM_MEDIUM'],
+            #"UTM_CAMPAIGN":item.fields['UTM_CAMPAIGN'],
             "UTM_TERM":item.fields['UTM_TERM'],
             "UTM_CONTENT":item.fields['UTM_CONTENT'],
             "PHONE": [{ "VALUE": item.fields['PHONE'][0]["VALUE"],"VALUE_TYPE": "OTHER","TYPE_ID": "PHONE"}],
@@ -52,4 +52,5 @@ def read_get_root(item: Item):
     print(response)
     answ = json.loads(response.text)
     return {"data": answ['result']}
+
 
