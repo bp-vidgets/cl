@@ -10,15 +10,6 @@ SOURCE_ID = os.environ['SOURCE_ID']
 
 class Item(BaseModel):
     fields: dict
-    NAME: str
-    PHONE: int
-    COMMENT: str | None = None
-    RECORD: str | None = None
-    UTM_SOURCE: str | None = None
-    UTM_MEDIUM: str | None = None
-    UTM_CAMPAIGN: str | None = None
-    UTM_TERM: str | None = None
-    UTM_CONTENT: str | None = None
   
 @app.post("/addlead/crm.lead.add.json")
 def read_post_root(item: Item):
@@ -61,3 +52,4 @@ def read_get_root(item: Item):
     print(response)
     answ = json.loads(response.text)
     return {"data": answ['result']}
+
