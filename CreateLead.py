@@ -18,11 +18,11 @@ def read_post_root(item: Item):
             'NAME': item.fields['NAME'],
             "STATUS_ID": "NEW",
             "SOURCE_ID": SOURCE_ID,
-            "UTM_SOURCE":item.fields['UTM_SOURCE'],
+            #"UTM_SOURCE":item.fields['UTM_SOURCE'],
             #"UTM_MEDIUM":item.fields['UTM_MEDIUM'],
             #"UTM_CAMPAIGN":item.fields['UTM_CAMPAIGN'],
-            "UTM_TERM":item.fields['UTM_TERM'],
-            "UTM_CONTENT":item.fields['UTM_CONTENT'],
+            #"UTM_TERM":item.fields['UTM_TERM'],
+            #"UTM_CONTENT":item.fields['UTM_CONTENT'],
             "PHONE": [{ "VALUE": item.fields['PHONE'][0]["VALUE"],"VALUE_TYPE": "OTHER","TYPE_ID": "PHONE"}],
             'COMMENTS': item.fields['COMMENTS']
         
@@ -39,11 +39,11 @@ def read_get_root(item: Item):
             'NAME': item.NAME,
             "STATUS_ID": "NEW",
             "SOURCE_ID": SOURCE_ID,
-            "UTM_SOURCE":item.UTM_SOURCE,
-            "UTM_MEDIUM":item.UTM_MEDIUM,
-            "UTM_CAMPAIGN":item.UTM_CAMPAIGN,
-            "UTM_TERM":item.UTM_TERM,
-            "UTM_CONTENT":item.UTM_CONTENT,
+            #"UTM_SOURCE":item.UTM_SOURCE,
+            #"UTM_MEDIUM":item.UTM_MEDIUM,
+            #"UTM_CAMPAIGN":item.UTM_CAMPAIGN,
+            #"UTM_TERM":item.UTM_TERM,
+            #"UTM_CONTENT":item.UTM_CONTENT,
             "PHONE": [{ "VALUE": item.PHONE,"VALUE_TYPE": "OTHER","TYPE_ID": "PHONE"}],
             'COMMENTS': item.COMMENT
         }}
@@ -52,5 +52,6 @@ def read_get_root(item: Item):
     print(response)
     answ = json.loads(response.text)
     return {"data": answ['result']}
+
 
 
