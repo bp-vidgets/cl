@@ -13,7 +13,7 @@ class Item(BaseModel):
   
 @app.post("/addlead/crm.lead.add.json")
 def read_post_root(item: Item):
-    if item.fields['UTM_CAMPAIGN'] = None:
+
         
     lead_data = {'fields':{
             'TITLE':item.fields['TITLE'],
@@ -54,6 +54,7 @@ def read_get_root(item: Item):
     print(response)
     answ = json.loads(response.text)
     return {"data": answ['result']}
+
 
 
 
