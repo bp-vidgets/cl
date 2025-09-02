@@ -4,6 +4,7 @@ import requests
 import json
 from pydantic import BaseModel
 from fastapi.encoders import jsonable_encoder
+from typing import Optional, List
 app = FastAPI()
 URLBITRIX = os.environ['URLBITRIX']
 EMOJI = os.environ['EMOJI']
@@ -94,6 +95,7 @@ def read_get_root(item: Item):
     print(response)
     answ = json.loads(response.text)
     return {"data": answ['result']}
+
 
 
 
