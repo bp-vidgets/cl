@@ -18,7 +18,7 @@ class Fields(BaseModel):
     NAME: Optional[str] = None
     COMMENTS: Optional[str] = None
     OPENED: Optional[str] = None
-    PHONE: Optional[List[Phone]] = None
+    PHONE: Optional[List[int]] = None
     SOURCE_DESCRIPTION: Optional[str] = None
     UTM_SOURCE: Optional[str] = None
     UTM_CONTENT: Optional[int] = None
@@ -95,6 +95,7 @@ def read_get_root(item: Item):
     print(response)
     answ = json.loads(response.text)
     return {"data": answ['result']}
+
 
 
 
