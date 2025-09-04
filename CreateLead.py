@@ -27,6 +27,7 @@ class RequestModel(BaseModel):
 
 @app.post("/addlead/crm.lead.add.json")
 def read_post_root(item: RequestModel):
+    print(item)
     lead_data = {'fields':{
             'TITLE':item.fields.TITLE,
             'NAME': item.fields.NAME,
@@ -66,6 +67,7 @@ def read_get_root(item: RequestModel):
     print(response)
     answ = json.loads(response.text)
     return {"data": answ['result']}
+
 
 
 
