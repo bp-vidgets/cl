@@ -10,9 +10,6 @@ URLBITRIX = os.environ['URLBITRIX']
 EMOJI = os.environ['EMOJI']
 SOURCE_ID = os.environ['SOURCE_ID']
 
-class Item(BaseModel):
-    fields: dict
-
 class Fields(BaseModel):
     TITLE: str
     NAME: Optional[str] = None
@@ -24,12 +21,8 @@ class Fields(BaseModel):
     UTM_CONTENT: Optional[int] = None
     UTM_TERM: Optional[int] = None
 
-class Params(BaseModel):
-    REGISTER_SONET_EVENT: Optional[str] = None
-
 class RequestModel(BaseModel):
     fields: Fields
-    params: Optional[Params] = None
     
 @app.post("/testprocess/")
 async def process(request: RequestModel):
@@ -55,7 +48,7 @@ async def process(request: RequestModel):
 
 
 @app.post("/addlead/crm.lead.add.json")
-def read_post_root(item: Item):
+def read_post_root(item: RequestModel):
     lead_data = {'fields':{
             'TITLE':item.fields['TITLE'],
             'NAME': item.fields['NAME'],
@@ -76,7 +69,7 @@ def read_post_root(item: Item):
     return {"data": answ['result']}
 
 @app.get("/addlead/")
-def read_get_root(item: Item):
+def read_get_root(item: RequestModel):
     lead_data = {'fields':{
             'TITLE':str(EMOJI + item.NAME),
             'NAME': item.NAME,
@@ -95,6 +88,7 @@ def read_get_root(item: Item):
     print(response)
     answ = json.loads(response.text)
     return {"data": answ['result']}
+
 
 
 
