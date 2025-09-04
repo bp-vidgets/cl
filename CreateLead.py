@@ -15,37 +15,16 @@ class Fields(BaseModel):
     NAME: Optional[str] = None
     COMMENTS: Optional[str] = None
     OPENED: Optional[str] = None
-    PHONE: Optional[List[int]] = None
+    PHONE: Optional[List[str]] = None
     SOURCE_DESCRIPTION: Optional[str] = None
     UTM_SOURCE: Optional[str] = None
-    UTM_CONTENT: Optional[int] = None
-    UTM_TERM: Optional[int] = None
+    UTM_CAMPAIGN: Optional[str] = None
+    UTM_MEDIUM: Optional[str] = None
+    UTM_CONTENT: Optional[str] = None
+    UTM_TERM: Optional[str] = None
 
 class RequestModel(BaseModel):
     fields: Fields
-    
-@app.post("/testprocess/")
-async def process(request: RequestModel):
-    lead_data = {'fields':{
-            'TITLE':request['NAME'],
-            'NAME': request['NAME'],
-            "STATUS_ID": "NEW",
-            "SOURCE_ID": SOURCE_ID,
-            "UTM_SOURCE":request['UTM_SOURCE'],
-            "UTM_MEDIUM":request['UTM_MEDIUM'],
-            "UTM_CAMPAIGN":request['UTM_CAMPAIGN'],
-            "UTM_TERM":request['UTM_TERM'],
-            "UTM_CONTENT":request['UTM_CONTENT'],
-            "PHONE": [{ "VALUE": request['PHONE'][0]["VALUE"],"VALUE_TYPE": "OTHER","TYPE_ID": "PHONE"}],
-            'COMMENTS': request['COMMENTS']
-        
-        }}
-    response = requests.post(str(f'{URLBITRIX}/crm.lead.add.json'), json=lead_data)
-    print(response)
-    answ = json.loads(response.text)
-    return {"data": answ['result']}
-
-
 
 @app.post("/addlead/crm.lead.add.json")
 def read_post_root(item: RequestModel):
@@ -88,6 +67,7 @@ def read_get_root(item: RequestModel):
     print(response)
     answ = json.loads(response.text)
     return {"data": answ['result']}
+
 
 
 
