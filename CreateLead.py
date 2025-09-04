@@ -14,14 +14,13 @@ class Fields(BaseModel):
     TITLE: str
     NAME: Optional[str] = None
     COMMENTS: Optional[str] = None
-    OPENED: Optional[str] = None
-    PHONE: Optional[List[str]] = None
+    PHONE: Optional[List[dict]] = None
     SOURCE_DESCRIPTION: Optional[str] = None
-    UTM_SOURCE: Optional[str] = None
-    UTM_CAMPAIGN: Optional[str] = None
-    UTM_MEDIUM: Optional[str] = None
-    UTM_CONTENT: Optional[str] = None
-    UTM_TERM: Optional[str] = None
+    UTM_SOURCE: Optional[str|int] = None
+    UTM_CAMPAIGN: Optional[str|int] = None
+    UTM_MEDIUM: Optional[str|int] = None
+    UTM_CONTENT: Optional[str|int] = None
+    UTM_TERM: Optional[str|int] = None
 
 class RequestModel(BaseModel):
     fields: Fields
@@ -33,11 +32,11 @@ def read_post_root(item: RequestModel):
             'NAME': item.fields['NAME'],
             "STATUS_ID": "NEW",
             "SOURCE_ID": SOURCE_ID,
-            #"UTM_SOURCE":item.fields['UTM_SOURCE'],
-            #"UTM_MEDIUM":item.fields['UTM_MEDIUM'],
-            #"UTM_CAMPAIGN":item.fields['UTM_CAMPAIGN'],
-            #"UTM_TERM":item.fields['UTM_TERM'],
-            #"UTM_CONTENT":item.fields['UTM_CONTENT'],
+            "UTM_SOURCE":item.fields['UTM_SOURCE'],
+            "UTM_MEDIUM":item.fields['UTM_MEDIUM'],
+            "UTM_CAMPAIGN":item.fields['UTM_CAMPAIGN'],
+            "UTM_TERM":item.fields['UTM_TERM'],
+            "UTM_CONTENT":item.fields['UTM_CONTENT'],
             "PHONE": [{ "VALUE": item.fields['PHONE'][0]["VALUE"],"VALUE_TYPE": "OTHER","TYPE_ID": "PHONE"}],
             'COMMENTS': item.fields['COMMENTS']
         
@@ -67,6 +66,7 @@ def read_get_root(item: RequestModel):
     print(response)
     answ = json.loads(response.text)
     return {"data": answ['result']}
+
 
 
 
