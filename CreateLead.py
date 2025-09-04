@@ -25,10 +25,7 @@ class Fields(BaseModel):
 class RequestModel(BaseModel):
     fields: Fields
 
-@app.post("/phone/crm.lead.add.json")
-def read_post_root(item: RequestModel):
-    tmpphone= item.fields.PHONE[0]["VALUE"]
-    return tmpphone
+
 @app.post("/addlead2/crm.lead.add.json")
 def read_post_root(item: RequestModel):
     tmpphone= item.fields.PHONE[0]["VALUE"]
@@ -49,19 +46,19 @@ def read_post_root(item: RequestModel):
 @app.post("/addlead/crm.lead.add.json")
 def read_post_root(item: RequestModel):
     lead_data = {'fields':{
-            'TITLE':item.fields['TITLE'],
-            'NAME': item.fields['NAME'],
+            'TITLE':item.fields.TITLE,
+            'NAME': item.fields.NAME,
             "STATUS_ID": "NEW",
             "SOURCE_ID": SOURCE_ID,
-            "UTM_SOURCE":item.fields['UTM_SOURCE'],
-            "UTM_MEDIUM":item.fields['UTM_MEDIUM'],
-            "UTM_CAMPAIGN":item.fields['UTM_CAMPAIGN'],
-            "UTM_TERM":item.fields['UTM_TERM'],
-            "UTM_CONTENT":item.fields['UTM_CONTENT'],
-            "PHONE": [{ "VALUE": item.fields['PHONE'][0]["VALUE"],"VALUE_TYPE": "OTHER","TYPE_ID": "PHONE"}],
-            'COMMENTS': item.fields['COMMENTS']
-        
-        }}
+            "UTM_SOURCE":item.fields.UTM_SOURCE,
+            "UTM_MEDIUM":item.fields.UTM_MEDIUM,
+            "UTM_CAMPAIGN":item.fields.UTM_CAMPAIGN,
+            "UTM_TERM":item.fields.UTM_TERM,
+            "UTM_CONTENT":item.fields.UTM_CONTENT,
+            "PHONE": [{ "VALUE": item.fields.PHONE[0]["VALUE"],"VALUE_TYPE": "OTHER","TYPE_ID": "PHONE"}],
+            'COMMENTS': item.fields.COMMENTS
+    }}
+    
     response = requests.post(str(f'{URLBITRIX}/crm.lead.add.json'), json=lead_data)
     print(response)
     answ = json.loads(response.text)
@@ -70,23 +67,24 @@ def read_post_root(item: RequestModel):
 @app.get("/addlead/")
 def read_get_root(item: RequestModel):
     lead_data = {'fields':{
-            'TITLE':str(EMOJI + item.NAME),
-            'NAME': item.NAME,
+            'TITLE':item.fields.TITLE,
+            'NAME': item.fields.NAME,
             "STATUS_ID": "NEW",
             "SOURCE_ID": SOURCE_ID,
-            #"UTM_SOURCE":item.UTM_SOURCE,
-            #"UTM_MEDIUM":item.UTM_MEDIUM,
-            #"UTM_CAMPAIGN":item.UTM_CAMPAIGN,
-            #"UTM_TERM":item.UTM_TERM,
-            #"UTM_CONTENT":item.UTM_CONTENT,
-            "PHONE": [{ "VALUE": item.PHONE,"VALUE_TYPE": "OTHER","TYPE_ID": "PHONE"}],
-            'COMMENTS': item.COMMENT
-        }}
+            "UTM_SOURCE":item.fields.UTM_SOURCE,
+            "UTM_MEDIUM":item.fields.UTM_MEDIUM,
+            "UTM_CAMPAIGN":item.fields.UTM_CAMPAIGN,
+            "UTM_TERM":item.fields.UTM_TERM,
+            "UTM_CONTENT":item.fields.UTM_CONTENT,
+            "PHONE": [{ "VALUE": item.fields.PHONE[0]["VALUE"],"VALUE_TYPE": "OTHER","TYPE_ID": "PHONE"}],
+            'COMMENTS': item.fields.COMMENTS
+    }}
     print(f'send data ={lead_data}')
     response = requests.post(str(f'{URLBITRIX}/crm.lead.add.json'), json=lead_data)
     print(response)
     answ = json.loads(response.text)
     return {"data": answ['result']}
+
 
 
 
