@@ -38,6 +38,7 @@ def read_post_root(item: RequestModel):
             "UTM_CONTENT":item.fields.UTM_CONTENT,
             "PHONE": [{ "VALUE": item.fields.PHONE[0]["VALUE"],"VALUE_TYPE": "OTHER","TYPE_ID": "PHONE"}],
             'COMMENTS': item.fields.COMMENTS
+    }}
         
 @app.post("/addlead/crm.lead.add.json")
 def read_post_root(item: RequestModel):
@@ -80,6 +81,7 @@ def read_get_root(item: RequestModel):
     print(response)
     answ = json.loads(response.text)
     return {"data": answ['result']}
+
 
 
 
