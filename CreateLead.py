@@ -11,7 +11,7 @@ ROISTAT_FIELD = os.environ['ROISTAT_FIELD']
 @app.post("/addlead/")
 def read_root(NAME:str,
               PHONE: str,
-              WMID: int| None = None,COMMENT: str| None = None,ROISTAT:str| None = None
+              WMID: int| None = None,COMMENT: str| None = None,ROISTAT:str| None = None,
               UTM_SOURCE: str| None = None,UTM_MEDIUM:str| None = None,UTM_CAMPAIGN:str| None = None,UTM_CONTENT:str| None = None,UTM_TERM:str| None = None
               ):
     lead_data = {'fields':{
@@ -33,4 +33,5 @@ def read_root(NAME:str,
     print(response)
     answ = json.loads(response.text)
     return {"data": answ['result']}
+
 
