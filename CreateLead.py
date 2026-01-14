@@ -7,10 +7,11 @@ URLBITRIX = os.environ['URLBITRIX']
 EMOJI = os.environ['EMOJI']
 SOURCE_ID = os.environ['SOURCE_ID']
 ASSIGNED_BY_ID = os.environ['ASSIGNED_BY_ID']
+ROISTAT_FIELD = os.environ['ROISTAT_FIELD']
 @app.post("/addlead/")
 def read_root(NAME:str,
               PHONE: str,
-              WMID: int| None = None,COMMENT: str| None = None,
+              WMID: int| None = None,COMMENT: str| None = None,ROISTAT:str| None = None,
               UTM_SOURCE: str| None = None,UTM_MEDIUM:str| None = None,UTM_CAMPAIGN:str| None = None,UTM_CONTENT:str| None = None,UTM_TERM:str| None = None
               ):
     lead_data = {'fields':{
@@ -25,9 +26,12 @@ def read_root(NAME:str,
             'UTM_CAMPAIGN':UTM_CAMPAIGN,
             'UTM_CONTENT':UTM_CONTENT,
             'UTM_TERM':UTM_TERM,
-            'COMMENTS':COMMENT
+            'COMMENTS':COMMENT,
+            ROISTAT_FIELD:ROISTAT
         }}
     response = requests.post(str(f'{URLBITRIX}/crm.lead.add.json'), json=lead_data)
     print(response)
     answ = json.loads(response.text)
     return {"data": answ['result']}
+
+
